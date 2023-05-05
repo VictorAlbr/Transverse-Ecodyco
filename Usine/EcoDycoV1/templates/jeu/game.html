@@ -1,0 +1,49 @@
+{% load static %}
+<html>
+<head>
+     <title>Jeu</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styleJeu2.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+</head>
+
+<body>
+     <!-- Bouton pour ouvrir le pop-up -->
+    <button id="open-woodcutting-popup">Couper du bois</button>
+
+    <!-- Pop-up -->
+    <div id="woodcutting-popup" style="display:none;">
+        <p>Veuillez choisir un nombre entre 0 et 100:</p>
+        <select id="woodcutting-number-selector">
+            {% for i in numbers %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <button id="submit-woodcutting-number">Soumettre</button>
+    </div>
+
+<script>
+        $(document).ready(function() {
+            // Code JavaScript existant
+            // ...
+
+            // Nouveau code pour le pop-up couper du bois
+            $("#open-woodcutting-popup").click(function() {
+                $("#woodcutting-popup").show();
+            });
+
+            $("#submit-woodcutting-number").click(function() {
+                const selectedWoodcuttingNumber = $("#woodcutting-number-selector").val();
+                console.log("Nombre de bois à couper sélectionné:", selectedWoodcuttingNumber);
+                $("#woodcutting-popup").hide();
+            });
+        });
+    </script>
+
+    <h3>Actions :</h3>
+    <a href="{% url 'game_action' '1' %}"><button>Planter plus d'arbres</button></a>
+    <a href="{% url 'game_action' '8' %}"><button>couper du bois = usine bois</button></a>
+
+    <p><img src="{% static 'images/ResultatJeu.png' %}" alt="Graphique resultat" width="750px"></p>
+
+</body>
+</html>

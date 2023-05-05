@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jeu</title>
+</head>
+<body>
+    <p>Population: {{ population }}</p>
+    <p>Air quality: {{ air_quality }}</p>
+    <p>Water quality: {{ water_quality }}</p>
+    <p>Soil quality: {{ soil_quality }}</p>
+    <p>Waste production: {{ waste_production }}</p>
+    <p>Food production: {{ food_production }}</p>
+    <p>Energy consumption: {{ energy_consumption }}</p>
+    <p>Budget: {{ budget }}</p>
+
+    <h3>Actions :</h3>
+    <a href="{% url 'game_action' '1' %}"><button>Planter plus d'arbres</button></a>
+    <a href="{% url 'game_action' '2' %}"><button>Construire une usine de traitement des eaux</button></a>
+    <a href="{% url 'game_action' '3' %}"><button>Mettre en place un programme de recyclage</button></a>
+    <a href="{% url 'game_action' '4' %}"><button>Planter des cultures</button></a>
+    <a href="{% url 'game_action' '5' %}"><button>Construire une centrale solaire</button></a>
+    <a href="{% url 'game_action' '6' %}"><button>Augmenter le taux d'imposition</button></a>
+</body>
+</html>

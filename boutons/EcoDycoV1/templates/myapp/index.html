@@ -1,0 +1,15 @@
+{% load static %}
+<html>
+<head>
+    <title>Jeu EcodycoV1</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylePA.css' %}">
+</head>
+<body>
+    <h1>Projet EcoDyco Version1</h1>
+    <p><img src="{% static 'images/couverture.jpg' %}" alt="Image de Couverture" width="300px"></p>
+    <p>Premier site jeu EcoDyco qui nous permet pour le moment de nous login et de lancer une partie</p>
+    <p>Cliquez sur un des boutons ci-dessous pour vous connecter ou lancer une partie :</p>
+    <button onclick="window.location.href='{% url 'login' %}'">connexion</button>
+    <button onclick="window.location.href='{% url 'jeu' %}'">jouer au jeu</button>
+</body>
+</html>
