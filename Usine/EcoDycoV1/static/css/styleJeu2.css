@@ -20,6 +20,14 @@ h3 {
     margin: 20px 0 10px;
 }
 
+/* Conteneur pour les boutons et les valeurs */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 /* Définir les styles des boutons */
 button {
     background-color: #4CAF50;
@@ -103,4 +111,9 @@ img {
 
 .popup input[type="submit"]:hover {
     background-color: #3e8e41;
+}
+
+/* Style pour décaler les valeurs vers la droite */
+.values {
+    margin-left: 20px;
 }
