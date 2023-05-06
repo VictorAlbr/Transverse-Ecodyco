@@ -3,9 +3,9 @@ from django.shortcuts import render
 import numpy as np
 import matplotlib.pyplot as plt
 from django.views import View
+from django.http import JsonResponse
 import random
 from math import pi
-import numpy as np
 
 population = 100000
 air_quality = 80
@@ -67,7 +67,24 @@ def game(request, action=None):
     global reserve_miniere
     global proprete
     global sea_quality
+    global flux_max_foret
+    forest_quantity = 500
+    wood_quantity = 0
+    flux_max_foret = 10
+    usure_r = 0.5
+    if request.method == "POST":
+        woodcutting_number = request.POST.get("woodcutting_number", 0)
+        print("le nombre de bois est : " + woodcutting_number)
 
+        # Mettez à jour les valeurs de forest_quantity et wood_quantity en fonction de woodcutting_number
+        # Par exemple (changez cela en fonction de votre logique de jeu) :
+        forest_quantity -= (int(woodcutting_number)*flux_max_foret)/100
+        wood_quantity += int(woodcutting_number)
+
+        return JsonResponse({
+            'forest_quantity': forest_quantity,
+            'wood_quantity': wood_quantity
+        })
     # Mettre à jour les paramètres en fonction de l'action passée
     if action == "1":
         air_quality += 5
@@ -157,6 +174,8 @@ def game(request, action=None):
         plt.savefig(filename)
 
     context = {
+        'forest_quantity': forest_quantity,
+        'wood_quantity': wood_quantity,
         'population': population,
         'air_quality': air_quality,
         'water_quality': water_quality,
@@ -174,7 +193,7 @@ def game(request, action=None):
         'reserve_de_bois': reserve_de_bois,
         'reserve_miniere': reserve_miniere,
         'proprete': proprete,
-        'sea_quality':sea_quality
+        'sea_quality': sea_quality
     }
 
     def view(request):
