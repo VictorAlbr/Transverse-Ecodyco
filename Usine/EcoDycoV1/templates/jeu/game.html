@@ -1,49 +1,67 @@
-{% load static %}
-<html>
-<head>
-     <title>Jeu</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styleJeu2.css' %}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-</head>
+    {% load static %}
+    <html>
+    <head>
+         <title>Jeu</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styleJeu2.css' %}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    </head>
 
-<body>
-     <!-- Bouton pour ouvrir le pop-up -->
-    <button id="open-woodcutting-popup">Couper du bois</button>
+    <body>
+        <h1>EcoDyco usine </h1>
+        <p>Quantité de forêt : <span id="forest-quantity">{{ forest_quantity }}</span></p>
+        <p>Quantité de bois : <span id="wood-quantity">{{ wood_quantity }}</span></p>
+        <p>Temps d'usure du bois: <span id="temps-usure-scierie">{{ temps_usure_bois }}</span></p>
+        <p>Usure R: <span id="usure-r">{{ usure_r }}</span></p>
 
-    <!-- Pop-up -->
-    <div id="woodcutting-popup" style="display:none;">
-        <p>Veuillez choisir un nombre entre 0 et 100:</p>
-        <select id="woodcutting-number-selector">
-            {% for i in numbers %}
-                <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
-        </select>
-        <button id="submit-woodcutting-number">Soumettre</button>
-    </div>
+        <!-- Bouton pour ouvrir le pop-up -->
+        <button id="open-woodcutting-popup">Couper du bois</button>
 
-<script>
-        $(document).ready(function() {
-            // Code JavaScript existant
-            // ...
+        <!-- Pop-up -->
+        <div id="woodcutting-popup" class="popup" style="display:none;">
+            <p>Veuillez entrer un nombre entre 0 et 100:</p>
+            <input id="woodcutting-number-input" type="number" min="0" max="100">
+            <button id="submit-woodcutting-number">Soumettre</button>
+        </div>
 
-            // Nouveau code pour le pop-up couper du bois
-            $("#open-woodcutting-popup").click(function() {
-                $("#woodcutting-popup").show();
+        <script>
+            $(document).ready(function() {
+                // Nouveau code pour le pop-up couper du bois
+                $("#open-woodcutting-popup").click(function() {
+                    $("#woodcutting-popup").show();
+                });
+
+                $("#submit-woodcutting-number").click(function() {
+                    const selectedWoodcuttingNumber = $("#woodcutting-number-input").val();
+                    console.log("Nombre de bois à couper sélectionné:", selectedWoodcuttingNumber);
+
+                    $.ajax({
+                        url: '{% url "game_action" "8" %}',
+                        method: 'POST',
+                        data: {
+                            'woodcutting_number': selectedWoodcuttingNumber,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+                        },
+                        success: function(response) {
+                            console.log("Succès de l'envoi:", response);
+                            // Mettre à jour les quantités de forêt et de bois avec les nouvelles valeurs
+                            $("#forest-quantity").text(response.forest_quantity);
+                            $("#wood-quantity").text(response.wood_quantity);
+                            $("#temps-usure-bois").text(response.temps_usure_bois);
+                            $("#usure-r").text(response.usure_r);
+
+                        },
+                        error: function(error) {
+                            console.log("Erreur lors de l'envoi:", error);
+                        }
+                    });
+
+                    $("#woodcutting-popup").hide();
+                });
             });
+        </script>
 
-            $("#submit-woodcutting-number").click(function() {
-                const selectedWoodcuttingNumber = $("#woodcutting-number-selector").val();
-                console.log("Nombre de bois à couper sélectionné:", selectedWoodcuttingNumber);
-                $("#woodcutting-popup").hide();
-            });
-        });
-    </script>
-
-    <h3>Actions :</h3>
-    <a href="{% url 'game_action' '1' %}"><button>Planter plus d'arbres</button></a>
-    <a href="{% url 'game_action' '8' %}"><button>couper du bois = usine bois</button></a>
-
-    <p><img src="{% static 'images/ResultatJeu.png' %}" alt="Graphique resultat" width="750px"></p>
-
-</body>
-</html>
+        <h3>Actions :</h3>
+        <a href="{% url 'game_action' '1' %}"><button>Planter plus d'arbres</button></a>
+        <a href="{% url 'game_action' '2' %}"><button id="woodcutting-submit">Réparer l'usine</button></a>
+    </body>
+    </html>

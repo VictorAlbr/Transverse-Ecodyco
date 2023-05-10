@@ -1,54 +1,62 @@
 /* Définir les styles globaux */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
 }
 
 /* Définir les styles des paragraphes */
 p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px 0;
 }
 
 /* Définir les styles des titres de section */
 h3 {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 20px 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+}
+
+/* Conteneur pour les boutons et les valeurs */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 /* Définir les styles des boutons */
 button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  margin: 10px 0;
-  cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0;
+    cursor: pointer;
 }
 
 button:hover {
-  background-color: #3e8e41;
+    background-color: #3e8e41;
 }
 
 /* Définir les styles des images dans les boutons */
 button img {
-  vertical-align: middle;
-  margin-right: 10px;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
 /* Définir les styles des liens */
 a {
-  color: #337ab7;
-  text-decoration: none;
+    color: #337ab7;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 img {
@@ -58,14 +66,54 @@ img {
     height: auto;
 }
 
-#woodcutting-popup {
+.popup {
     display: none;
-    background-color: white;
-    border: 1px solid black;
-    padding: 20px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
+    background-color: white;
+    border: 1px solid black;
+    padding: 20px;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.popup p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.popup button {
+    margin-top: 20px;
+}
+
+.popup input[type="number"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    width: 80px; /* ajuster la largeur du champ de saisie */
+}
+
+.popup input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.popup input[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+
+/* Style pour décaler les valeurs vers la droite */
+.values {
+    margin-left: 20px;
 }
