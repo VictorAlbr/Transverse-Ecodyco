@@ -1,9 +1,13 @@
-<!DOCTYPE html>
+{% load static %}
 <html>
 <head>
-    <title>Jeu</title>
+     <title>Jeu</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styleJeu2.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 </head>
+
 <body>
+<!--
     <p>Population: {{ population }}</p>
     <p>Air quality: {{ air_quality }}</p>
     <p>Water quality: {{ water_quality }}</p>
@@ -12,13 +16,123 @@
     <p>Food production: {{ food_production }}</p>
     <p>Energy consumption: {{ energy_consumption }}</p>
     <p>Budget: {{ budget }}</p>
-
+    <p>tax rate: {{ tax_rate }}</p>
+    <p>Energy electric: {{ energy_electric }}</p>
+    <p>Energy fossile: {{ energy_fossile }}</p>
+    <p>Reserve nourriture: {{ reserve_nourriture }}</p>
+    <p>Pouvoir d'achat de la population: {{ pouvoir_achat_population }}</p>
+    <p>Population maximale: {{ population_maximale }}</p>
+    <p>Reserve de bois: {{ reserve_de_bois }}</p>
+    <p>Reserve minière: {{ reserve_miniere }}</p>
+    <p>proprete: {{ proprete }}</p>
+//-->
     <h3>Actions :</h3>
+<!--
+    <form method="get" action="{% url 'game_action' '1' %}">
+        <button type="submit" style="background: none; border: none;" >
+            <img src="{% static 'images/arbre.png' %}" alt="arbre-image" width="75px">
+        </button>
+    </form>
+    <form method="get" action="{% url 'game_action' '2' %}">
+        <button type="submit" style="background: none; border: none;" >
+            <img src="{% static 'images/usine.png' %}" alt="usine-image" width="75px">
+        </button>
+    </form>
+    <form method="get" action="{% url 'game_action' '3' %}">
+        <button type="submit" style="background: none; border: none;" >
+            <img src="{% static 'images/symbole-de-recyclage.png' %}" alt="recyclage-image" width="75px">
+        </button>
+    </form>
+    <form method="get" action="{% url 'game_action' '4' %}">
+        <button type="submit" style="background: none; border: none;" >
+            <img src="{% static 'images/ble.png' %}" alt="ble-image" width="75px">
+        </button>
+    </form>
+    <form method="get" action="{% url 'game_action' '5' %}">
+        <button type="submit" style="background: none; border: none;" >
+            <img src="{% static 'images/energie-solaire.png' %}" alt="solaire-image" width="75px">
+        </button>
+    </form>
+    <form method="get" action="{% url 'game_action' '6' %}">
+        <button type="submit" style="background: none; border: none;" >
+            <img src="{% static 'images/impot.png' %}" alt="impots-image" width="75px">
+        </button>
+    </form>
+//-->
+     <!-- Bouton pour ouvrir le pop-up -->
+    <button id="open-woodcutting-popup">Couper du bois</button>
+
+    <!-- Pop-up -->
+    <div id="woodcutting-popup" style="display:none;">
+        <p>Veuillez choisir un nombre entre 0 et 100:</p>
+        <select id="woodcutting-number-selector">
+            {% for i in numbers %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
+        <button id="submit-woodcutting-number">Soumettre</button>
+    </div>
+
+<script>
+        $(document).ready(function() {
+            // Code JavaScript existant
+            // ...
+
+            // Nouveau code pour le pop-up couper du bois
+            $("#open-woodcutting-popup").click(function() {
+                $("#woodcutting-popup").show();
+            });
+
+            $("#submit-woodcutting-number").click(function() {
+                const selectedWoodcuttingNumber = $("#woodcutting-number-selector").val();
+                console.log("Nombre de bois à couper sélectionné:", selectedWoodcuttingNumber);
+                $("#woodcutting-popup").hide();
+            });
+        });
+    </script>
+
     <a href="{% url 'game_action' '1' %}"><button>Planter plus d'arbres</button></a>
+    <a href="{% url 'game_action' '8' %}"><button>couper du bois = usine bois</button></a>
+
     <a href="{% url 'game_action' '2' %}"><button>Construire une usine de traitement des eaux</button></a>
+    <a href="{% url 'game_action' '2.5' %}"><button>Ameliorer les usines de traitement des eaux</button></a>
+
     <a href="{% url 'game_action' '3' %}"><button>Mettre en place un programme de recyclage</button></a>
+    <a href="{% url 'game_action' '3.5' %}"><button>ameliorer les programmes de recyclage</button></a>
+
     <a href="{% url 'game_action' '4' %}"><button>Planter des cultures</button></a>
+    <a href="{% url 'game_action' '4.5' %}"><button>Ameliorer des cultures</button></a>
+
     <a href="{% url 'game_action' '5' %}"><button>Construire une centrale solaire</button></a>
+    <a href="{% url 'game_action' '5.5' %}"><button>Ameliorer centrale solaire</button></a>
+
     <a href="{% url 'game_action' '6' %}"><button>Augmenter le taux d'imposition</button></a>
+
+    <a href="{% url 'game_action' '9' %}"><button>pécher</button></a>
+
+    <a href="{% url 'game_action' '10' %}"><button>construire des éoliennes sur terre</button></a>
+    <a href="{% url 'game_action' '10.5' %}"><button>ameliorer des eoliennes</button></a>
+
+    <a href="{% url 'game_action' '11' %}"><button>construire des barrages hydraulique</button></a>
+    <a href="{% url 'game_action' '11.5' %}"><button>Ameliorer les barrages hydraulique</button></a>
+
+    <a href="{% url 'game_action' '12' %}"><button>Construire des habitations</button></a>
+
+    <a href="{% url 'game_action' '13' %}"><button>miner</button></a>
+
+    <a href="{% url 'game_action' '14' %}"><button>Construire des routes</button></a>
+    <a href="{% url 'game_action' '14.5' %}"><button>Maintenir les routes</button></a>
+
+    <a href="{% url 'game_action' '15' %}"><button>Augmenter la capacité maximale de nourriture</button></a>
+
+    <a href="{% url 'game_action' '16' %}"><button>exporter nourriture</button></a>
+
+    <a href="{% url 'game_action' '17' %}"><button>exporter energie</button></a>
+
+    <a href="{% url 'game_action' '18' %}"><button>exporter déchets</button></a>
+    <a href="{% url 'game_action' '19' %}"><button>construire des éliennes mer</button></a>
+
+    <p><img src="{% static 'images/ResultatJeu.png' %}" alt="Graphique resultat" width="750px"></p>
+
 </body>
 </html>

@@ -1,0 +1,32 @@
+/* Centrer les paragraphes */
+p {
+    text-align: center;
+    margin: 10px;
+}
+
+/* Styler les titres des actions */
+h3 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Styler les boutons d'actions */
+form {
+    display: inline-block;
+    margin: 0 10px;
+    text-align: center;
+    vertical-align: top;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+}
